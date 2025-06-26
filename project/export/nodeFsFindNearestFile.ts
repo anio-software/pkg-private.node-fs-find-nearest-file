@@ -7,5 +7,5 @@ const implementation = await nodeFsFindNearestFileSyncFactory()
 export async function nodeFsFindNearestFile(
 	configFileName: string, dirPath: string
 ): Promise<string|false> {
-	return await implementation(configFileName, dirPath)
+	return implementation(configFileName, dirPath)
 }
