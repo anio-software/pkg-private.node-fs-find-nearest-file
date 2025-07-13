@@ -1,4 +1,4 @@
-import {nodeFsFindNearestFile} from "../dist/default/index.min.mjs"
+import {nodeFsFindNearestFile} from "../products/project/dist/default/index.min.mjs"
 import {fileURLToPath} from "node:url"
 import path from "node:path"
 
