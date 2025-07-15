@@ -4,14 +4,18 @@ import {
 
 export type Implementation = ReturnType<typeof nodeFsFindNearestFileSyncFactory>
 
-const nodeRequireSymbol = Symbol.for("@anio-software/enkore/global/nodeRequire")
+const nodeJSRequire: NodeJS.Require|false = await (async () => {
+	try {
+		const {default: mod} = await import("node:module")
 
-export function loadImplementation(): Implementation|false {
-	if (!(nodeRequireSymbol in globalThis)) {
+		return mod.createRequire("/")
+	} catch {
 		return false
 	}
+})()
 
-	const nodeJSRequire = (globalThis as any)[nodeRequireSymbol]
+export function loadImplementation(): Implementation|false {
+	if (!nodeJSRequire) return false
 
 	return nodeFsFindNearestFileSyncFactory(nodeJSRequire)
 }
